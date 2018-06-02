@@ -1,0 +1,12 @@
+---
+- name: "Instalando os pacotes WEB"
+  hosts: web # no host web(fsociety01)
+  become: true # eh o -b da linha de comando - falando que vai precisar de root
+  roles:
+    - web # chamar a role web
+
+- name: "Instalando os pacotes DB"
+  hosts: db # no host db (fsociety02)
+  become: true # eh o -b da linha de comando - falando que vai precisar de root
+  roles:
+    - db # chamar a role db

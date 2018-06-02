@@ -1,0 +1,7 @@
+---
+- name: "Instalando os pacotes necessarios para o DB"
+  apt: pkg={{ item }} state=present
+  with_items:
+    - sqlite
+    - mysql-server
+    - galera-3

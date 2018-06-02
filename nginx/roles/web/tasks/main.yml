@@ -1,0 +1,13 @@
+---
+- name: "Instalando os pacotes necessarios para a nossa app web"
+  apt: pkg={{ item }} state=present # modulo apt
+  with_items:
+  - nginx
+  - git
+  - nmap
+  - php
+  notify: restart nginx # chama o handler
+
+- name: "Copiando o arquivo index.html personalizado para a maquina web"
+  template: src=index.html.j2 dest=/var/www/html/index.html # template python
+  notify: restart nginx # chama o handler

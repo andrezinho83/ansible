@@ -1,0 +1,29 @@
+---
+# tasks file for mysql
+# CentOS
+- name: Install Mysqk package
+  yum: name{{ item }} state=present
+  with_items:
+    - mysql-server
+    - MySQL-python
+    - python-semanage
+
+# Debian
+- name: Install Mysqk package
+  yum: name{{ item }} state=present
+  with_items:
+    - python3-mysqldb
+    - python-semanage
+    - python3-pymysql
+ 
+- name: Configure SELinux to start mysql on any port
+  seboolean: name=mysql_connect_any state=true persistent=yes
+  when: ansible_selinux.status == "enabled"
+
+- name: Create MySQL configuration file
+  template: src=my.cnf.j2 dest=/etc/my.cnf
+  notify:
+    - restart mysql
+
+- name: Start MySQL Service
+  service: name=mysqld state=started enabled=yes

@@ -1,0 +1,16 @@
+---
+# tasks file for common
+- name: Instalando python3-selinux
+  apt: name=python3-selinux state=present
+#  yum: nam
+
+# name: Install epel-release
+# yum: name=epel-release state=present
+
+## ansible-facts = executar o setup(-m)
+- name: Reload ansible-facts
+  setup: 
+
+#- name: Set up iptables rules
+#  copy: src=iptables-save dest=/etc/sysconfig.iptables
+#  notify: restart iptables
